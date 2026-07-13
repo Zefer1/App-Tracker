@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "dev": "tsx watch src/app.ts",
     "compile": "tsc",
     "start": "node dist/app.js"
   },
@@ -15,6 +16,7 @@
     "@types/express": "^5.0.6",
     "@types/node": "^26.1.1",
     "@types/pg": "^8.20.0",
+    "tsx": "^4.23.1",
     "typescript": "^7.0.2"
   }
 }
