@@ -1,0 +1,59 @@
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+  "email": "teste@teste.com",
+  "password": "123456",
+  "name": "Felizberto"
+}
+
+###
+
+POST http://localhost:3000/api/applications
+Content-Type: application/json
+
+{
+  "company":"PlanetSeason",
+  "position":"Web Dev",
+  "user_id": "3a26c2b4-b8dc-439e-bf42-ba135a576942"
+}
+
+###
+
+GET http://localhost:3000/api/users
+Content-Type: application/json
+
+###
+
+GET http://localhost:3000/api/applications
+
+###
+
+PUT http://localhost:3000/api/applications/2f1f59e6-0282-4c67-badd-f998345b5623
+Content-Type: application/json
+
+{
+  "company": "PlanetSeason",
+  "position": "Senior Web Dev",
+  "status": "ENTREVISTA",
+  "link": "https://planetseason.example.com/apply",
+  "notes": "Atualizando para vaga sênior",
+  "user_id": "f6450a69-79cd-495e-b662-8bbeb9b00fe9"
+}
+
+###
+
+PUT http://localhost:3000/api/users/f6450a69-79cd-495e-b662-8bbeb9b00fe9
+Content-Type: application/json
+
+{
+  "name": "Felizberto Atualizado",
+  "password": "novasenha123"
+}
+
+###
+DELETE http://localhost:3000/api/users/f6450a69-79cd-495e-b662-8bbeb9b00fe9
+Content-Type: application/json
+
+###
+DELETE http://localhost:3000/api/applications/22f3a6fb-852f-4ddb-85d4-5936a0fe36ae
