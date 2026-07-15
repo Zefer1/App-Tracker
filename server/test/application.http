@@ -2,7 +2,7 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "email": "teste@teste.com",
+  "email": "",
   "password": "123456",
   "name": "Felizberto"
 }
@@ -57,3 +57,28 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/api/applications/22f3a6fb-852f-4ddb-85d4-5936a0fe36ae
+
+###
+
+# updateApplication parcial: só status, resto deve ficar intacto
+PUT http://localhost:3000/api/applications/1092db6d-efee-47f6-a99f-c0172d8f6ec8
+Content-Type: application/json
+
+{
+  "status": "ENTREVISTA"
+}
+
+###
+
+# updateApplication parcial: só company, resto (incluindo status acima) deve ficar intacto
+PUT http://localhost:3000/api/applications/1092db6d-efee-47f6-a99f-c0172d8f6ec8
+Content-Type: application/json
+
+{
+  "company": "PlanetSeason Corp"
+}
+
+###
+
+# confirmar estado final: status = ENTREVISTA, company = PlanetSeason Corp, position/link/notes/user_id intactos
+GET http://localhost:3000/api/applications
