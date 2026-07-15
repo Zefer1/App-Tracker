@@ -43,8 +43,16 @@ export async function updateUser(req:Request, res:Response){
   `
   const values = [name, password, id];
 
-  const result = await pool.query(text,values);
-  res.json(result.rows[0])
+  try {
+    const result = await pool.query(text,values);
+    if (result.rowCount === 0) return res.status(404).json({ error: "user id não existe na BD" });
+    res.json(result.rows[0]);
+  } catch (err: any) {
+    if (err.code === '22P02') {
+      return res.status(400).json({ error: "user id inválido" });
+    }
+    throw err;
+  }
 }
 
 export async function deleteUser(req: Request, res: Response) {

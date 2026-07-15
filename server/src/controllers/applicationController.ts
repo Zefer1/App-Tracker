@@ -79,6 +79,7 @@ export async function deleteApplication(req:Request, res:Response) {
     if (err.code === '22P02') {
     return res.status(400).json({ error: "application id inválido" });
   }
+  throw err;
   }
-  
+
 }
