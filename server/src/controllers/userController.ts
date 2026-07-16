@@ -1,5 +1,6 @@
 import pool from "../db/pool.ts";
 import type { Request, Response } from "express";
+import bcrypt from "bcrypt";
 
 export async function createUser(req: Request, res: Response) {
     const {email, password, name} = req.body;
@@ -11,10 +12,12 @@ export async function createUser(req: Request, res: Response) {
     if(password.length < 8){
       return res.status(400).json({error: "Password tem que ter no mínimo 8 caracteres"})
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     try {
       const result = await pool.query(
     'INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING user_id, name, email, created_at',
-    [email, password, name]
+    [email, hashedPassword, name]
   );  
     res.status(201).json(result.rows[0]);
     } catch (err: any) {

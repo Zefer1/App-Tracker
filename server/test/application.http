@@ -3,8 +3,8 @@ Content-Type: application/json
 
 {
   "email": "",
-  "password": "123456",
-  "name": "Felizberto"
+  "password": "N0rdgraa!",
+  "name": ""
 }
 
 ###
@@ -52,7 +52,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/users/f6450a69-79cd-495e-b662-8bbeb9b00fe9
+DELETE http://localhost:3000/api/users/335aa804-47f6-47e2-afc1-4ac0daa4205e
 Content-Type: application/json
 
 ###
