@@ -2,9 +2,9 @@ POST http://localhost:3000/api/users
 Content-Type: application/json
 
 {
-  "email": "",
-  "password": "123456",
-  "name": "Felizberto"
+  "email": "josefer@yahoo.pt",
+  "password": "admin123",
+  "name": "admin"
 }
 
 ###
@@ -52,7 +52,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/users/f6450a69-79cd-495e-b662-8bbeb9b00fe9
+DELETE http://localhost:3000/api/users/d6dc5828-c724-45db-b922-63e18d85a702
 Content-Type: application/json
 
 ###
@@ -82,3 +82,26 @@ Content-Type: application/json
 
 # confirmar estado final: status = ENTREVISTA, company = PlanetSeason Corp, position/link/notes/user_id intactos
 GET http://localhost:3000/api/applications
+
+
+###
+
+# sem login / sem cookie -> espera 401
+GET http://localhost:3000/api/applications
+
+###
+
+# login -> guarda o cookie httpOnly na sessão do REST Client
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "josefer@yahoo.pt",
+  "password": "admin123"
+}
+
+###
+
+# mesma sessão/ficheiro, cookie enviado automaticamente -> espera 200
+GET http://localhost:3000/api/applications
+

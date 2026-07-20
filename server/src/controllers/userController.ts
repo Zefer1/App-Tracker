@@ -1,5 +1,7 @@
 import pool from "../db/pool.ts";
 import type { Request, Response } from "express";
+import type { JwtPayload } from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export async function createUser(req: Request, res: Response) {
     const {email, password, name} = req.body;
@@ -11,10 +13,12 @@ export async function createUser(req: Request, res: Response) {
     if(password.length < 8){
       return res.status(400).json({error: "Password tem que ter no mínimo 8 caracteres"})
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
     try {
       const result = await pool.query(
     'INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING user_id, name, email, created_at',
-    [email, password, name]
+    [email, hashedPassword, name]
   );  
     res.status(201).json(result.rows[0]);
     } catch (err: any) {
@@ -25,14 +29,18 @@ export async function createUser(req: Request, res: Response) {
     }  
 }
 
-export async function getUsers (req: Request, res: Response) {
-  const text = 'SELECT user_id, name, email, created_at FROM users'
-    const result = await pool.query(text);
-    res.json(result.rows)
+export async function getMe (req: Request, res: Response) {
+  const { userId } = req.user as JwtPayload;
+
+  const text = 'SELECT user_id, name, email, created_at FROM users WHERE user_id = $1';
+  const result = await pool.query(text, [userId]);
+
+  if (result.rowCount === 0) return res.status(404).json({ error: "user não encontrado" });
+  res.json(result.rows[0]);
 }
 
 export async function updateUser(req:Request, res:Response){
-  const {id} = req.params;
+  const { userId } = req.user as JwtPayload;
   const {name, password} = req.body;
   const text =  `
   UPDATE users
@@ -41,35 +49,21 @@ export async function updateUser(req:Request, res:Response){
   WHERE user_id = $3
   RETURNING user_id, name, email, created_at
   `
-  const values = [name, password, id];
+  const values = [name, password, userId];
 
-  try {
-    const result = await pool.query(text,values);
-    if (result.rowCount === 0) return res.status(404).json({ error: "user id não existe na BD" });
-    res.json(result.rows[0]);
-  } catch (err: any) {
-    if (err.code === '22P02') {
-      return res.status(400).json({ error: "user id inválido" });
-    }
-    throw err;
-  }
+  const result = await pool.query(text,values);
+  if (result.rowCount === 0) return res.status(404).json({ error: "user não encontrado" });
+  res.json(result.rows[0]);
 }
 
 export async function deleteUser(req: Request, res: Response) {
-  const {id} = req.params;
+  const { userId } = req.user as JwtPayload;
 
-  try {
   const text = `
   DELETE FROM users
   WHERE user_id = $1
   `;
-  const value = [id]
-  const result = await pool.query(text,value)
-  if(result.rowCount === 0) return res.status(404).json({error: "user não existe na BD"})
+  const result = await pool.query(text, [userId])
+  if(result.rowCount === 0) return res.status(404).json({error: "user não encontrado"})
   res.status(200).json(result.rowCount)
-  } catch (err: any) {
-    if (err.code === '22P02') {
-    return res.status(400).json({ error: "user id inválido" });
-  }
-}
 }
