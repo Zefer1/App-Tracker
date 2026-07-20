@@ -44,3 +44,13 @@ export async function login (req: Request, res: Response) {
         user: { id: user.user_id, name: user.name, email: user.email }
     });
 }
+
+export async function logout (req: Request, res: Response) {
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+    });
+
+    res.status(200).json({ message: 'Logout efetuado com sucesso' });
+}
