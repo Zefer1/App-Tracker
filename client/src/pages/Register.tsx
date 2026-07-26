@@ -26,7 +26,7 @@ export default function RegisterForm() {
         "Content-Type": "application/json",
   }, 
   body: JSON.stringify({ email, password, name, passwordConfirmation }), 
-  credentials: "include",
+  credentials: "include"
 });
 
 
