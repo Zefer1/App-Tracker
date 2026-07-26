@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import Register from "./pages/Register";
+import RegisterForm from "./pages/Register";
 import LoginForm from "./pages/Login"
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/login" element={<LoginForm/>} />
-      <Route path="/register" element={<Register/>} />
+      <Route path="/register" element={<RegisterForm/>} />
       <Route path="/" element={<Home/>} />
       <Route element={<ProtectedRoute />}>
       <Route path="/settings" element={<Settings/>} />
