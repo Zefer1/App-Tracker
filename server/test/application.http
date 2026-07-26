@@ -15,7 +15,7 @@ Content-Type: application/json
 {
   "company":"PlanetSeason",
   "position":"Web Dev",
-  "user_id": "3a26c2b4-b8dc-439e-bf42-ba135a576942"
+  "user_id": "9ac46db4-e2e5-4bc9-bf82-f9a9adf3a64f"
 }
 
 ###
@@ -96,8 +96,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "josefer@yahoo.pt",
-  "password": "admin123"
+  "email": "zeferino@gmail.com",
+  "password": "aldeiaMACACOS2012"
 }
 
 ###
