@@ -13,7 +13,7 @@ POST http://localhost:3000/api/applications
 Content-Type: application/json
 
 {
-  "company":"PlanetSeason",
+  "company":"solae",
   "position":"Web Dev",
   "user_id": "9ac46db4-e2e5-4bc9-bf82-f9a9adf3a64f"
 }
@@ -105,3 +105,8 @@ Content-Type: application/json
 # mesma sessão/ficheiro, cookie enviado automaticamente -> espera 200
 GET http://localhost:3000/api/applications
 
+###
+
+# GET de uma application específica, mesma sessão (cookie já ativo pelo login acima)
+# troca o id abaixo por um id que apareça na resposta do GET /api/applications de cima
+GET http://localhost:3000/api/applications/b8a33112-7510-4d0b-b15d-9e549f9c693a
