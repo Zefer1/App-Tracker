@@ -3,6 +3,7 @@ import type { Request, Response } from "express";
 import type { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+
 export async function createUser(req: Request, res: Response) {
     const {email, password, name} = req.body;
 
@@ -59,7 +60,24 @@ export async function updateUser(req:Request, res:Response){
 
 export async function deleteUser(req: Request, res: Response) {
   const { userId } = req.user as JwtPayload;
+  const { password } = req.body;
 
+  if (!password) {
+      return res.status(400).json({error: "Password obrigatória para apagar o usuário."})
+    }
+
+    const result1 = await pool.query('SELECT user_id, name, email, password FROM users WHERE user_id = $1', [userId])
+    const user1 = result1.rows[0]; 
+
+    if (!user1) return res.status(404).json({ error: "user não encontrado" });
+    const passwordMatch = await bcrypt.compare(password, user1.password);
+
+    if(!passwordMatch){
+        return res.status(401).json({error:"Password inválida!"});
+    }
+
+    
+    
   const text = `
   DELETE FROM users
   WHERE user_id = $1

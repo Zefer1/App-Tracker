@@ -52,8 +52,12 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/api/users/d6dc5828-c724-45db-b922-63e18d85a702
+DELETE http://localhost:3000/api/users/me
 Content-Type: application/json
+
+{
+  "password": "admin123"
+}
 
 ###
 DELETE http://localhost:3000/api/applications/22f3a6fb-852f-4ddb-85d4-5936a0fe36ae
@@ -96,8 +100,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "zeferino@gmail.com",
-  "password": "aldeiaMACACOS2012"
+  "email": "josefer@yahoo.pt",
+  "password": "admin123"
 }
 
 ###
