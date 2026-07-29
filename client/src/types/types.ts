@@ -10,3 +10,11 @@ export type Application = {
   created_at: string;
   user_id: string;
 };
+
+export type User = {
+  user_id: string;
+  name: string;
+  password: string;
+  email: string;
+  created_at: string;
+}

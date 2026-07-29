@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import type { Application } from "../types/application";
+import type { Application } from "../types/types";
 
 export default function Applications() {
   const [applications, setApplications] = useState<Application[]>([]);

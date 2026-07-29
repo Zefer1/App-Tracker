@@ -34,7 +34,7 @@ export default function EditApplication() {
       }
     }
     fecthApplications();
-  },[id])
+  },[id]);
 
   async function HandleSubmit (e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
