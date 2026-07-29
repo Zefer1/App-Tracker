@@ -42,6 +42,7 @@ export async function getMe (req: Request, res: Response) {
 export async function updateUser(req:Request, res:Response){
   const { userId } = req.user as JwtPayload;
   const {name, password} = req.body;
+  const hashedPassword = password ? await bcrypt.hash(password, 10) : undefined;
   const text =  `
   UPDATE users
   SET name = COALESCE($1, name),
@@ -49,7 +50,7 @@ export async function updateUser(req:Request, res:Response){
   WHERE user_id = $3
   RETURNING user_id, name, email, created_at
   `
-  const values = [name, password, userId];
+  const values = [name, hashedPassword, userId];
 
   const result = await pool.query(text,values);
   if (result.rowCount === 0) return res.status(404).json({ error: "user não encontrado" });

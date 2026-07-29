@@ -38,7 +38,7 @@ if(response.ok) {
     <div>
       <form onSubmit={HandleSubmit}>
       <input placeholder="Email" className="border rounded px-2 py-1" value = {email} onChange={e => setEmail(e.target.value)}/>
-      <input placeholder="Password" className="border rounded px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
+      <input placeholder="Password" type="password" className="border rounded px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
       {erro && <p>{erro}</p>}
       <button className="border rounded px-2 py-1" type="submit">Login</button>
     </form>
