@@ -70,27 +70,6 @@ if(response.ok) {
 
   }
   
-  async function HandleLogout () {
-      const url = 'http://localhost:3000/api/auth/logout';
-
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          credentials: "include"
-          
-        });
-        if(response.ok){
-  navigate('/login')
-} else {
-  const data = await response.json();
-  setErro(data.error)
-}
-      } catch (error) {
-        console.log(error)
-      }
-
-  }
-  
   async function HandleDelete (e:React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -132,7 +111,6 @@ if(response.ok) {
         <input placeholder="Password" type="password" className="border rounded px-2 py-1" value = {deleteUserPassword} onChange={e => setDeleteUserPassword(e.target.value)}/>
         <button className="border rounded px-2 py-1" type="submit">Apagar conta</button>
       </form>
-      <button className="border rounded px-2 py-1" onClick={HandleLogout}>Logout</button>
     </div>
   )
 }

@@ -7,6 +7,7 @@ import Applications from "./pages/Applications";
 import EditApplication from "./pages/EditApplication";
 import NewApplication from "./pages/NewApplications";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Layout from "./components/Layout";
 
  
 function App() {
@@ -17,10 +18,13 @@ function App() {
       <Route path="/register" element={<RegisterForm/>} />
       <Route path="/" element={<Home/>} />
       <Route element={<ProtectedRoute />}>
-      <Route path="/settings" element={<Settings/>} />
-      <Route path="/applications" element={<Applications/>} />
-      <Route path="/applications/new" element={<NewApplication/>} />
-      <Route path="/applications/:id/edit" element={<EditApplication/>} />
+       <Route element={<Layout />}>
+          <Route path="/settings" element={<Settings/>} />
+          <Route path="/applications" element={<Applications/>} />
+          <Route path="/applications/new" element={<NewApplication/>} />
+          <Route path="/applications/:id/edit" element={<EditApplication/>} />
+        </Route>
+      
       </Route>
     </Routes>
     </BrowserRouter>
