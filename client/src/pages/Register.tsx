@@ -45,14 +45,14 @@ if(response.ok) {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form className="flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl" onSubmit={HandleSubmit}>
-       <h1 className="text-2xl font-bold text-center">Regista-te aqui</h1> 
-      <input placeholder="Email" className="border rounded-md px-2 py-1" value = {email} onChange={e => setEmail(e.target.value)}/>
-      <input placeholder="Nome" className="border rounded-md px-2 py-1" value = {name} onChange={e => setName(e.target.value)}/>
-      <input placeholder="Password" type="password" className="border rounded-md px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
-      <input placeholder="Confirmar Password" type="password" className="border rounded-md px-2 py-1" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
+      <form className="card" onSubmit={HandleSubmit}>
+       <h1 className="text-2xl font-bold text-center">Regista-te aqui</h1>
+      <input placeholder="Email" className="input-field" value = {email} onChange={e => setEmail(e.target.value)}/>
+      <input placeholder="Nome" className="input-field" value = {name} onChange={e => setName(e.target.value)}/>
+      <input placeholder="Password" type="password" className="input-field" value = {password} onChange={e => setPassword(e.target.value)}/>
+      <input placeholder="Confirmar Password" type="password" className="input-field" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
       <p className="text-red-500">{erro}</p>
-      <button className="border rounded-md px-2 py-1 bg-blue-400 text-white cursor-pointer hover:bg-blue-500 hover:text-black" type="submit">Registar</button>
+      <button className="btn btn-primary" type="submit">Registar</button>
       <p className="text-sm text-center">
   Já tens conta?{' '}
   <Link to="/login" className="text-blue-600 hover:underline">

@@ -35,7 +35,7 @@ const navigate = useNavigate();
   async function HandleSubmit (e:React.FormEvent<HTMLFormElement>) {
       e.preventDefault();
 
-      if(password !== passwordConfirmation) {setErro('Password tem que ser igual á confirmação da password'); 
+      if(password !== passwordConfirmation) {setErro('Password tem que ser igual á confirmação da password!'); 
     return;
     } 
 
@@ -100,16 +100,16 @@ if(response.ok) {
       <h1 className="text-2xl font-bold text-center">Utilizador: {user?.name}</h1>
       <p className="text-sm text-center">{user?.email}</p>
       <p className="text-red-500">{erro}</p>
-      <form className="flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl" onSubmit={HandleSubmit}>
-        <input placeholder="Name" className="border rounded-md px-2 py-1" value = {name} onChange={e => setName(e.target.value)}/>
-        <input placeholder="Nova password" type="password" className="border rounded-md px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
-        <input placeholder="Confirmar Password" type="password" className="border rounded-md px-2 py-1" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
-        <button className="border rounded-md px-2 py-1 bg-blue-400 text-white cursor-pointer hover:bg-blue-500 hover:text-black" type="submit">Guardar alterações</button>
+      <form className="card" onSubmit={HandleSubmit}>
+        <input placeholder="Name" className="input-field" value = {name} onChange={e => setName(e.target.value)}/>
+        <input placeholder="Nova password" type="password" className="input-field" value = {password} onChange={e => setPassword(e.target.value)}/>
+        <input placeholder="Confirmar Password" type="password" className="input-field" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
+        <button className="btn btn-primary" type="submit">Guardar alterações</button>
       </form>
-      <form className="flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl" onSubmit={HandleDelete}>
+      <form className="card" onSubmit={HandleDelete}>
         <p>Preencha os campos para apagar a sua conta.</p>
-        <input placeholder="Password" type="password" className="border rounded-md px-2 py-1" value = {deleteUserPassword} onChange={e => setDeleteUserPassword(e.target.value)}/>
-        <button className="border rounded-md px-2 py-1 bg-red-400 text-white cursor-pointer hover:bg-red-500 hover:text-black" type="submit">Apagar conta</button>
+        <input placeholder="Password" type="password" className="input-field" value = {deleteUserPassword} onChange={e => setDeleteUserPassword(e.target.value)}/>
+        <button className="btn btn-danger" type="submit">Apagar conta</button>
       </form>
     </div>
   )
