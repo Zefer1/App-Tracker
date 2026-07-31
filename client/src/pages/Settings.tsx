@@ -96,20 +96,20 @@ if(response.ok) {
   } 
 
   return (
-    <div>
-      <p>{erro}</p>
-      <h1>{user?.name}</h1>
-      <p>{user?.email}</p>
-      <form onSubmit={HandleSubmit}>
-        <input placeholder="Name" className="border rounded px-2 py-1" value = {name} onChange={e => setName(e.target.value)}/>
-        <input placeholder="Password" type="password" className="border rounded px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
-        <input placeholder="Confirmar Password" type="password" className="border rounded px-2 py-1" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
-        <button className="border rounded px-2 py-1" type="submit">Guardar alterações</button>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 gap-4">
+      <h1 className="text-2xl font-bold text-center">Utilizador: {user?.name}</h1>
+      <p className="text-sm text-center">{user?.email}</p>
+      <p className="text-red-500">{erro}</p>
+      <form className="flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl" onSubmit={HandleSubmit}>
+        <input placeholder="Name" className="border rounded-md px-2 py-1" value = {name} onChange={e => setName(e.target.value)}/>
+        <input placeholder="Nova password" type="password" className="border rounded-md px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
+        <input placeholder="Confirmar Password" type="password" className="border rounded-md px-2 py-1" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
+        <button className="border rounded-md px-2 py-1 bg-blue-400 text-white cursor-pointer hover:bg-blue-500 hover:text-black" type="submit">Guardar alterações</button>
       </form>
-      <form onSubmit={HandleDelete}>
+      <form className="flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl" onSubmit={HandleDelete}>
         <p>Preencha os campos para apagar a sua conta.</p>
-        <input placeholder="Password" type="password" className="border rounded px-2 py-1" value = {deleteUserPassword} onChange={e => setDeleteUserPassword(e.target.value)}/>
-        <button className="border rounded px-2 py-1" type="submit">Apagar conta</button>
+        <input placeholder="Password" type="password" className="border rounded-md px-2 py-1" value = {deleteUserPassword} onChange={e => setDeleteUserPassword(e.target.value)}/>
+        <button className="border rounded-md px-2 py-1 bg-red-400 text-white cursor-pointer hover:bg-red-500 hover:text-black" type="submit">Apagar conta</button>
       </form>
     </div>
   )
