@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -35,12 +36,19 @@ if(response.ok) {
 
 
   return (
-    <div>
-      <form onSubmit={HandleSubmit}>
-      <input placeholder="Email" className="border rounded px-2 py-1" value = {email} onChange={e => setEmail(e.target.value)}/>
-      <input placeholder="Password" type="password" className="border rounded px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
-      {erro && <p>{erro}</p>}
-      <button className="border rounded px-2 py-1" type="submit">Login</button>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <form className="flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl" onSubmit={HandleSubmit}>
+        <h1 className="text-2xl font-bold text-center">Entrar</h1>
+      <input placeholder="Email" className="border rounded-md px-2 py-1" value = {email} onChange={e => setEmail(e.target.value)}/>
+      <input placeholder="Password" type="password" className="border rounded-md px-2 py-1" value = {password} onChange={e => setPassword(e.target.value)}/>
+       <p className="text-red-500">{erro}</p>
+      <button className="border rounded-md px-2 py-1 cursor-pointer hover:bg-blue-500 hover:text-black bg-blue-400 text-white" type="submit">Login</button>
+      <p className="text-sm text-center">
+  Ainda não tens conta?{' '}
+  <Link to="/register" className="text-blue-600 hover:underline">
+    Regista-te aqui
+  </Link>
+</p>
     </form>
     </div>
   )

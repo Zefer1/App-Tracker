@@ -8,11 +8,11 @@ export async function createUser(req: Request, res: Response) {
     const {email, password, name} = req.body;
 
     if (!email || !password || !name) {
-      return res.status(400).json({error: "email, password e name são obrigatórios"})
+      return res.status(400).json({error: "Email, password e nome são obrigatórios!"})
     }
 
     if(password.length < 8){
-      return res.status(400).json({error: "Password tem que ter no mínimo 8 caracteres"})
+      return res.status(400).json({error: "Password tem que ter no mínimo 8 caracteres!"})
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -24,7 +24,7 @@ export async function createUser(req: Request, res: Response) {
     res.status(201).json(result.rows[0]);
     } catch (err: any) {
       if (err.code === '23505') {
-        return res.status(409).json({ error: "email já cadastrado" });
+        return res.status(409).json({ error: "Email já cadastrado!" });
       }
       throw err;
     }  
@@ -36,7 +36,7 @@ export async function getMe (req: Request, res: Response) {
   const text = 'SELECT user_id, name, email, created_at FROM users WHERE user_id = $1';
   const result = await pool.query(text, [userId]);
 
-  if (result.rowCount === 0) return res.status(404).json({ error: "user não encontrado" });
+  if (result.rowCount === 0) return res.status(404).json({ error: "Utilizador não encontrado." });
   res.json(result.rows[0]);
 }
 
@@ -54,7 +54,7 @@ export async function updateUser(req:Request, res:Response){
   const values = [name, hashedPassword, userId];
 
   const result = await pool.query(text,values);
-  if (result.rowCount === 0) return res.status(404).json({ error: "user não encontrado" });
+  if (result.rowCount === 0) return res.status(404).json({ error: "Utilizador não encontrado." });
   res.json(result.rows[0]);
 }
 
@@ -63,13 +63,13 @@ export async function deleteUser(req: Request, res: Response) {
   const { password } = req.body;
 
   if (!password) {
-      return res.status(400).json({error: "Password obrigatória para apagar o usuário."})
+      return res.status(400).json({error: "Password obrigatória para apagar o usuário!"})
     }
 
     const result1 = await pool.query('SELECT user_id, name, email, password FROM users WHERE user_id = $1', [userId])
     const user1 = result1.rows[0]; 
 
-    if (!user1) return res.status(404).json({ error: "user não encontrado" });
+    if (!user1) return res.status(404).json({ error: "Utilizador não encontrado." });
     const passwordMatch = await bcrypt.compare(password, user1.password);
 
     if(!passwordMatch){
@@ -83,6 +83,6 @@ export async function deleteUser(req: Request, res: Response) {
   WHERE user_id = $1
   `;
   const result = await pool.query(text, [userId])
-  if(result.rowCount === 0) return res.status(404).json({error: "user não encontrado"})
+  if(result.rowCount === 0) return res.status(404).json({error: "Utilizador não encontrado."})
   res.status(200).json(result.rowCount)
 }
