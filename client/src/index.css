@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @layer components {
   .input-field {
-    @apply border rounded-md px-2 py-1;
+    @apply border rounded-md px-2 py-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white;
   }
 
   .btn {
-    @apply border rounded-md px-2 py-1 text-white cursor-pointer hover:text-black;
-  }
+  @apply inline-flex items-center justify-center text-center border rounded-md px-2 py-1 text-white cursor-pointer hover:text-black;
+}
 
   .btn-primary {
     @apply bg-blue-400 hover:bg-blue-500;
@@ -18,6 +20,6 @@
   }
 
   .card {
-    @apply flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl;
+    @apply flex flex-col gap-4 bg-white p-8 shadow-md rounded-2xl dark:bg-gray-800 dark:text-gray-100;
   }
 }

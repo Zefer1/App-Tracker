@@ -64,11 +64,12 @@ export default function EditApplication() {
 
   } catch (error) {
     console.log(error)
+    setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
   }
 
   }
   return (
-   <div className="flex items-center justify-center min-h-screen bg-gray-100">
+   <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
     <form className="card" onSubmit={HandleSubmit}>
       <h1 className="text-2xl font-bold text-center">Altera a tua candidatura atual aqui.</h1>
         <input placeholder="Company" className="input-field" value = {company} onChange={e => setCompany(e.target.value)}/>
@@ -82,7 +83,7 @@ export default function EditApplication() {
           <option  value="OFERTA">Oferta</option>
           <option  value="RECUSADO">Recusado</option>
         </select>
-        {erro && <p>{erro}</p>}
+        {erro && <p className="text-red-500 dark:text-red-400">{erro}</p>}
         <button className="btn btn-primary" type="submit">Guardar alterações</button>
       </form>
    </div>

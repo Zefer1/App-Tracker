@@ -16,7 +16,7 @@ export default function ProtectedRoute () {
         }
         fetchAuthentication();
     },[])
-if(authentication === null) return <p>A carregar...</p>
+if(authentication === null) return <p className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">A carregar...</p>
 if(authentication === false) return <Navigate to="/login"/>
 return <Outlet/>;
 }

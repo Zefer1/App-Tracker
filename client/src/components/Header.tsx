@@ -1,10 +1,12 @@
 import { Link, useNavigate, } from "react-router"
-import { useState } from "react";
+import { useState, useContext } from "react";
+import  { ThemeContext }  from "../context/ThemeContext";
 
 
 
 export default function Header() {
     const [erro, setErro] = useState('');
+    const { theme, toggleTheme } = useContext(ThemeContext)!;
 
     const navigate = useNavigate();
     
@@ -25,20 +27,22 @@ export default function Header() {
 }
       } catch (error) {
         console.log(error)
+        setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
       }
 
   }
 
     return (
-        <div className="flex w-full justify-between bg-gray-300">
+        <div className="flex w-full justify-between bg-gray-300 dark:bg-gray-800 dark:text-gray-100">
           <div className="flex p-4 gap-4">
             <Link className="btn btn-primary" to="/settings">Definições</Link>
             <Link className="btn btn-primary" to="/applications">Candidaturas</Link>
             <Link className="btn btn-primary" to="/applications/new">Nova candidatura</Link>
           </div>
-          <div className="p-4">
+          <div className="flex p-4 gap-4">
+            <button className="btn btn-primary" onClick={toggleTheme}>{theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}</button>
             <button className="btn btn-primary" onClick={HandleLogout}>Logout</button>
-            <p>{erro}</p>
+            <p className="text-red-500 dark:text-red-400">{erro}</p>
           </div>
         </div>
     )

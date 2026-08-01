@@ -17,3 +17,8 @@ export type User = {
   email: string;
   created_at: string;
 }
+
+export type ThemeContextType = {
+  theme: string;
+  toggleTheme: () => void;
+};

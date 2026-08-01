@@ -9,6 +9,7 @@ const [password, setPassword] = useState('');
 const [passwordConfirmation, setPasswordConfirmation] = useState('');
 const [deleteUserPassword, setDeleteUserPassword] = useState('');
 const [erro,setErro] = useState('');
+const [sucesso, setSucesso] = useState('');
 
 const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const navigate = useNavigate();
         }
       } catch(error){
         console.log(error)
-        setErro('Algo correu mal. Verifique a conexão á internet e tente de novo');
+        setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
       }
     }
     fetchUser();
@@ -34,10 +35,12 @@ const navigate = useNavigate();
 
   async function HandleSubmit (e:React.FormEvent<HTMLFormElement>) {
       e.preventDefault();
+      setErro('');
+      setSucesso('');
 
-      if(password !== passwordConfirmation) {setErro('Password tem que ser igual á confirmação da password!'); 
+      if(password !== passwordConfirmation) {setErro('Password tem que ser igual à confirmação da password!');
     return;
-    } 
+    }
 
     const payload: { name: string; password?: string } = { name };
       if (password !== '') {
@@ -58,7 +61,7 @@ const navigate = useNavigate();
 
 
 if(response.ok) {
-  alert('Alterações gravadas com sucesso.')
+  setSucesso('Alterações gravadas com sucesso.')
 } else {
   const data = await response.json();
   setErro(data.error)
@@ -66,6 +69,7 @@ if(response.ok) {
 
     } catch (error) {
       console.log(error)
+      setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
     }
 
   }
@@ -92,14 +96,16 @@ if(response.ok) {
       }
     } catch (error) {
     console.log(error)
+    setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
   }
-  } 
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 gap-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100 gap-4">
       <h1 className="text-2xl font-bold text-center">Utilizador: {user?.name}</h1>
       <p className="text-sm text-center">{user?.email}</p>
-      <p className="text-red-500">{erro}</p>
+      <p className="text-red-500 dark:text-red-400">{erro}</p>
+      <p className="text-green-600 dark:text-green-400">{sucesso}</p>
       <form className="card" onSubmit={HandleSubmit}>
         <input placeholder="Name" className="input-field" value = {name} onChange={e => setName(e.target.value)}/>
         <input placeholder="Nova password" type="password" className="input-field" value = {password} onChange={e => setPassword(e.target.value)}/>

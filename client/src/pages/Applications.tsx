@@ -46,7 +46,7 @@ export default function Applications() {
         }
     } catch (error) {
       console.log(error)
-      setErro('Não foi possivel conectar ao servidor.')
+      setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
     }
   }
 
@@ -64,8 +64,8 @@ export default function Applications() {
 
   return (
 
-    <div className="min-h-screen bg-gray-100 p-8">
-      <p className="text-red-500">{erro}</p>
+    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
+      <p className="text-red-500 dark:text-red-400">{erro}</p>
       <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">{listApplications}</ul>
     </div>
   )

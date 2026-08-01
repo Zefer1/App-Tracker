@@ -8,12 +8,14 @@ import EditApplication from "./pages/EditApplication";
 import NewApplication from "./pages/NewApplications";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Layout from "./components/Layout";
+import { ThemeProvider } from "./context/ThemeProvider";
 
  
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
+    <ThemeProvider>
+      <Routes>
       <Route path="/login" element={<LoginForm/>} />
       <Route path="/register" element={<RegisterForm/>} />
       <Route path="/" element={<Home/>} />
@@ -26,7 +28,8 @@ function App() {
         </Route>
       
       </Route>
-    </Routes>
+      </Routes>
+    </ThemeProvider>
     </BrowserRouter>
   )
 }

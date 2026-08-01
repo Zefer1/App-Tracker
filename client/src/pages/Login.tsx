@@ -26,26 +26,28 @@ export default function LoginForm() {
 if(response.ok) {
   navigate('/applications')
 } else {
-  setErro('Password ou email invalido.')
+  const data = await response.json();
+  setErro(data.error)
 }
 
     } catch (error) {
       console.log(error)
+      setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
     }
   }
 
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <form className="card" onSubmit={HandleSubmit}>
         <h1 className="text-2xl font-bold text-center">Entrar</h1>
       <input placeholder="Email" className="input-field" value = {email} onChange={e => setEmail(e.target.value)}/>
       <input placeholder="Password" type="password" className="input-field" value = {password} onChange={e => setPassword(e.target.value)}/>
-       <p className="text-red-500">{erro}</p>
+       <p className="text-red-500 dark:text-red-400">{erro}</p>
       <button className="btn btn-primary" type="submit">Login</button>
       <p className="text-sm text-center">
   Ainda não tens conta?{' '}
-  <Link to="/register" className="text-blue-600 hover:underline">
+  <Link to="/register" className="text-blue-600 dark:text-blue-400 hover:underline">
     Regista-te aqui
   </Link>
 </p>

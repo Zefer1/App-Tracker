@@ -14,9 +14,9 @@ export default function RegisterForm() {
     async function HandleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if(password !== passwordConfirmation) {setErro('Password tem que ser igual á confirmação da password'); 
+    if(password !== passwordConfirmation) {setErro('Password tem que ser igual à confirmação da password!');
     return;
-    } 
+    }
 
     const url = 'http://localhost:3000/api/users';
 
@@ -40,22 +40,23 @@ if(response.ok) {
 
     } catch (error) {
       console.log(error)
+      setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
     }
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <form className="card" onSubmit={HandleSubmit}>
        <h1 className="text-2xl font-bold text-center">Regista-te aqui</h1>
       <input placeholder="Email" className="input-field" value = {email} onChange={e => setEmail(e.target.value)}/>
       <input placeholder="Nome" className="input-field" value = {name} onChange={e => setName(e.target.value)}/>
       <input placeholder="Password" type="password" className="input-field" value = {password} onChange={e => setPassword(e.target.value)}/>
       <input placeholder="Confirmar Password" type="password" className="input-field" value = {passwordConfirmation} onChange={e => setPasswordConfirmation(e.target.value)}/>
-      <p className="text-red-500">{erro}</p>
+      <p className="text-red-500 dark:text-red-400">{erro}</p>
       <button className="btn btn-primary" type="submit">Registar</button>
       <p className="text-sm text-center">
   Já tens conta?{' '}
-  <Link to="/login" className="text-blue-600 hover:underline">
+  <Link to="/login" className="text-blue-600 dark:text-blue-400 hover:underline">
     Faz o login aqui!
   </Link>
 </p>
