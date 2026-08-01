@@ -2,6 +2,13 @@ import { useEffect, useState } from "react"
 import type { Application } from "../types/types";
 import { Link } from "react-router";
 
+const statusLabels = {
+  SEM_RESPOSTA: "Sem resposta",
+  ENTREVISTA: "Entrevista",
+  OFERTA: "Oferta",
+  RECUSADO: "Recusado",
+};
+
 export default function Applications() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [erro, setErro] = useState('');
@@ -46,7 +53,7 @@ export default function Applications() {
   const listApplications = applications.map(application =>
     <li className="card" key={application.id}>
       <h2 className="text-lg font-bold">{application.company}</h2>
-      <p>{application.status}</p>
+      <p>{statusLabels[application.status]}</p>
       <p>{application.position}</p>
       <div className="flex gap-2">
         <Link className="btn btn-primary" to={`/applications/${application.id}/edit`}>Editar</Link>
@@ -59,7 +66,7 @@ export default function Applications() {
 
     <div className="min-h-screen bg-gray-100 p-8">
       <p className="text-red-500">{erro}</p>
-      <ul className="flex flex-col gap-4">{listApplications}</ul>
+      <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">{listApplications}</ul>
     </div>
   )
 }

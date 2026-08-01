@@ -68,21 +68,22 @@ export default function EditApplication() {
 
   }
   return (
-   <div>
-    <form onSubmit={HandleSubmit}>
-        <input placeholder="Company" className="border rounded px-2 py-1" value = {company} onChange={e => setCompany(e.target.value)}/>
-        <input placeholder="Position" className="border rounded px-2 py-1" value = {position} onChange={e => setPosition(e.target.value)}/>
-        <input placeholder="Link" className="border rounded px-2 py-1" value = {link} onChange={e => setLink(e.target.value)}/>
-        <input placeholder="Notes" className="border rounded px-2 py-1" value = {notes} onChange={e => setNotes(e.target.value)}/>
+   <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <form className="card" onSubmit={HandleSubmit}>
+      <h1 className="text-2xl font-bold text-center">Altera a tua candidatura atual aqui.</h1>
+        <input placeholder="Company" className="input-field" value = {company} onChange={e => setCompany(e.target.value)}/>
+        <input placeholder="Position" className="input-field" value = {position} onChange={e => setPosition(e.target.value)}/>
+        <input placeholder="Link" className="input-field" value = {link} onChange={e => setLink(e.target.value)}/>
+        <input placeholder="Notes" className="input-field" value = {notes} onChange={e => setNotes(e.target.value)}/>
         <label>Escolhe um estado</label>
-        <select value={status} onChange={e => setStatus(e.target.value)} className="border rounded px-2 py-1">
-          <option value="SEM_RESPOSTA">Sem resposta</option>
-          <option value="ENTREVISTA">Entrevista</option>
-          <option value="OFERTA">Oferta</option>
-          <option value="RECUSADO">Recusado</option>
+        <select value={status} onChange={e => setStatus(e.target.value)} className="input-field">
+          <option  value="SEM_RESPOSTA">Sem resposta</option>
+          <option  value="ENTREVISTA">Entrevista</option>
+          <option  value="OFERTA">Oferta</option>
+          <option  value="RECUSADO">Recusado</option>
         </select>
         {erro && <p>{erro}</p>}
-        <button className="border rounded px-2 py-1" type="submit">Guardar alterações</button>
+        <button className="btn btn-primary" type="submit">Guardar alterações</button>
       </form>
    </div>
   )

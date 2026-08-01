@@ -2,7 +2,7 @@ export type Application = {
   id: string;
   company: string;
   position: string;
-  status: string;
+  status: "SEM_RESPOSTA" | "ENTREVISTA" | "OFERTA" | "RECUSADO";
   link: string | null;
   notes: string | null;
   applied_at: string;
@@ -14,7 +14,6 @@ export type Application = {
 export type User = {
   user_id: string;
   name: string;
-  password: string;
   email: string;
   created_at: string;
 }
