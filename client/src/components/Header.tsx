@@ -30,11 +30,16 @@ export default function Header() {
   }
 
     return (
-        <div>
-            <Link to="/settings">Definições</Link>
-            <Link to="/applications">Candidaturas</Link>
-            <button className="border rounded px-2 py-1" onClick={HandleLogout}>Logout</button>
+        <div className="flex w-full justify-between bg-gray-300">
+          <div className="flex p-4 gap-4">
+            <Link className="btn btn-primary" to="/settings">Definições</Link>
+            <Link className="btn btn-primary" to="/applications">Candidaturas</Link>
+            <Link className="btn btn-primary" to="/applications/new">Nova candidatura</Link>
+          </div>
+          <div className="p-4">
+            <button className="btn btn-primary" onClick={HandleLogout}>Logout</button>
             <p>{erro}</p>
+          </div>
         </div>
     )
 }

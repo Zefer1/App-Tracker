@@ -43,21 +43,23 @@ export default function Applications() {
     }
   }
 
-  const listApplications = applications.map(application => 
-    <li key={application.id}>
-      <Link to={`/applications/${application.id}/edit`}>Editar</Link>
-      <button onClick={() => {HandleDeleteApplication(application.id)}}>Apagar Candidatura</button>
-      <h2>{application.company}</h2>
+  const listApplications = applications.map(application =>
+    <li className="card" key={application.id}>
+      <h2 className="text-lg font-bold">{application.company}</h2>
       <p>{application.status}</p>
       <p>{application.position}</p>
+      <div className="flex gap-2">
+        <Link className="btn btn-primary" to={`/applications/${application.id}/edit`}>Editar</Link>
+        <button className="btn btn-danger" onClick={() => {HandleDeleteApplication(application.id)}}>Apagar Candidatura</button>
+      </div>
     </li>
   );
 
   return (
-    
-    <div>
-      <p>{erro}</p>
-      <ul>{listApplications}</ul>
+
+    <div className="min-h-screen bg-gray-100 p-8">
+      <p className="text-red-500">{erro}</p>
+      <ul className="flex flex-col gap-4">{listApplications}</ul>
     </div>
   )
 }
