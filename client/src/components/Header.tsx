@@ -1,12 +1,11 @@
 import { Link, useNavigate, } from "react-router"
-import { useState, useContext } from "react";
-import  { ThemeContext }  from "../context/ThemeContext";
+import { useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 
 
 export default function Header() {
     const [erro, setErro] = useState('');
-    const { theme, toggleTheme } = useContext(ThemeContext)!;
 
     const navigate = useNavigate();
     
@@ -40,7 +39,7 @@ export default function Header() {
             <Link className="btn btn-primary" to="/applications/new">Nova candidatura</Link>
           </div>
           <div className="flex p-4 gap-4">
-            <button className="btn btn-primary" onClick={toggleTheme}>{theme === 'dark' ? 'Modo Claro' : 'Modo Escuro'}</button>
+            <ThemeToggle />
             <button className="btn btn-primary" onClick={HandleLogout}>Logout</button>
             <p className="text-red-500 dark:text-red-400">{erro}</p>
           </div>

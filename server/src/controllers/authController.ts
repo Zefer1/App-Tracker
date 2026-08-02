@@ -7,7 +7,7 @@ export async function login (req: Request, res: Response) {
     const {email, password} = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({error: "email e password são obrigatórios!"})
+      return res.status(400).json({error: "Email e password são obrigatórios!"})
     }
 
     const text = 'SELECT user_id, name, email, password FROM users WHERE email = $1';

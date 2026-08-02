@@ -19,6 +19,6 @@ export type User = {
 }
 
 export type ThemeContextType = {
-  theme: string;
+  theme: "light" | "dark";
   toggleTheme: () => void;
 };
