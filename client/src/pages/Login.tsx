@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
+import ThemeToggle from "../components/ThemeToggle";
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -39,6 +40,7 @@ if(response.ok) {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <ThemeToggle />
       <form className="card" onSubmit={HandleSubmit}>
         <h1 className="text-2xl font-bold text-center">Entrar</h1>
       <input placeholder="Email" className="input-field" value = {email} onChange={e => setEmail(e.target.value)}/>
