@@ -12,11 +12,12 @@ const statusLabels = {
 export default function Applications() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [erro, setErro] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fecthApplications() {
       try {
-        const response = await fetch('http://localhost:3000/api/applications', {credentials: 'include'}); 
+        const response = await fetch('http://localhost:3000/api/applications', {credentials: 'include'});
         if(response.ok){
         const data = await response.json()
         setApplications(data)
@@ -27,6 +28,8 @@ export default function Applications() {
       } catch (error) {
         console.log(error)
         setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
+      } finally {
+        setLoading(false)
       }
     }
     fecthApplications();
@@ -68,7 +71,11 @@ export default function Applications() {
 
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
       <p className="text-red-500 dark:text-red-400">{erro}</p>
-      <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">{listApplications}</ul>
+      {loading ? (
+        <p>A carregar candidaturas...</p>
+      ) : (
+        <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">{listApplications}</ul>
+      )}
     </div>
   )
 }

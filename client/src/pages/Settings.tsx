@@ -10,6 +10,7 @@ const [passwordConfirmation, setPasswordConfirmation] = useState('');
 const [deleteUserPassword, setDeleteUserPassword] = useState('');
 const [erro,setErro] = useState('');
 const [sucesso, setSucesso] = useState('');
+const [loading, setLoading] = useState(true);
 
 const navigate = useNavigate();
 
@@ -28,6 +29,8 @@ const navigate = useNavigate();
       } catch(error){
         console.log(error)
         setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
+      } finally {
+        setLoading(false)
       }
     }
     fetchUser();
@@ -98,6 +101,14 @@ if(response.ok) {
     console.log(error)
     setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
   }
+  }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+        <p>A carregar...</p>
+      </div>
+    )
   }
 
   return (

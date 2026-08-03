@@ -10,13 +10,14 @@ export default function EditApplication() {
   const [link, setLink] = useState('');
   const [notes, setNotes] = useState('');
   const [erro, setErro] = useState('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
     async function fecthApplications() {
       try {
-        const response = await fetch(`http://localhost:3000/api/applications/${id}`, {credentials: 'include'}); 
+        const response = await fetch(`http://localhost:3000/api/applications/${id}`, {credentials: 'include'});
         if(response.ok){
         const data = await response.json()
         setCompany(data.company);
@@ -31,6 +32,8 @@ export default function EditApplication() {
       } catch (error) {
         console.log(error)
         setErro('Não foi possível ligar ao servidor. Verifica a tua ligação.');
+      } finally {
+        setLoading(false)
       }
     }
     fecthApplications();
@@ -68,6 +71,15 @@ export default function EditApplication() {
   }
 
   }
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
+        <p>A carregar...</p>
+      </div>
+    )
+  }
+
   return (
    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
     <form className="card" onSubmit={HandleSubmit}>
