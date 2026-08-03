@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import ThemeToggle from "../components/ThemeToggle";
+import { API_URL } from "../config/api";
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -12,7 +13,7 @@ export default function LoginForm() {
 
   async function HandleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const url = 'http://localhost:3000/api/auth/login';
+    const url = `${API_URL}/api/auth/login`;
 
     try {
       const response = await fetch(url, {

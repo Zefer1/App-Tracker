@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Navigate, Outlet } from "react-router"
+import { API_URL } from "../config/api";
 
 export default function ProtectedRoute () {
     const [authentication, setAuthentication] = useState<boolean | null>(null);
 
     useEffect(() => {
         async function fetchAuthentication() {
-             const url = 'http://localhost:3000/api/users/me';
+             const url = `${API_URL}/api/users/me`;
              try {
                 const response = await fetch(url, {credentials: "include"});
                 setAuthentication(response.ok);

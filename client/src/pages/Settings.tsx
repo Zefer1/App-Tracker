@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { User } from "../types/types"
 import { useNavigate } from "react-router";
+import { API_URL } from "../config/api";
 
 export default function Settings() {
 const [user, setUser] = useState<User>();
@@ -17,7 +18,7 @@ const navigate = useNavigate();
   useEffect(() => {
     async function fetchUser() {
       try{
-        const response = await fetch('http://localhost:3000/api/users/me', {credentials: 'include'});
+        const response = await fetch(`${API_URL}/api/users/me`, {credentials: 'include'});
         if(response.ok){
           const data = await response.json()
           setUser(data);
@@ -50,7 +51,7 @@ const navigate = useNavigate();
       payload.password = password;
       }
 
-    const url = 'http://localhost:3000/api/users/me';
+    const url = `${API_URL}/api/users/me`;
 
     try {
       const response = await fetch(url, {
@@ -80,7 +81,7 @@ if(response.ok) {
   async function HandleDelete (e:React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    const url = 'http://localhost:3000/api/users/me';
+    const url = `${API_URL}/api/users/me`;
 
     try {
       const response = await fetch(url, {

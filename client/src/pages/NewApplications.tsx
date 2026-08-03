@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router";
+import { API_URL } from "../config/api";
 
 
 export default function NewApplication() {
@@ -19,7 +20,7 @@ export default function NewApplication() {
       return;
     }
 
-    const url = 'http://localhost:3000/api/applications';
+    const url = `${API_URL}/api/applications`;
 
   try {
     const response = await fetch(url, {

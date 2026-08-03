@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express, { type Express, type Request, type Response } from 'express';
 import cors from 'cors';
 import UsersRouter from './routes/users.js'
@@ -10,7 +11,7 @@ const app: Express = express();
 const port = 3000;
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true
 }));
 app.use(express.json());

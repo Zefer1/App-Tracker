@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import type { Application } from "../types/types";
 import { Link } from "react-router";
+import { API_URL } from "../config/api";
 
 const statusLabels = {
   SEM_RESPOSTA: "Sem resposta",
@@ -17,7 +18,7 @@ export default function Applications() {
   useEffect(() => {
     async function fecthApplications() {
       try {
-        const response = await fetch('http://localhost:3000/api/applications', {credentials: 'include'});
+        const response = await fetch(`${API_URL}/api/applications`, {credentials: 'include'});
         if(response.ok){
         const data = await response.json()
         setApplications(data)
@@ -38,7 +39,7 @@ export default function Applications() {
   async function HandleDeleteApplication (id: string) {
     if (!window.confirm("Tens a certeza que queres apagar esta candidatura?")) return;
 
-    const url = `http://localhost:3000/api/applications/${id}`
+    const url = `${API_URL}/api/applications/${id}`
     try {
       const response = await fetch(url, {
         method: "DELETE",

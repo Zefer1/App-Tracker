@@ -1,6 +1,7 @@
 import { Link, useNavigate, } from "react-router"
 import { useState } from "react";
 import ThemeToggle from "./ThemeToggle";
+import { API_URL } from "../config/api";
 
 
 
@@ -10,7 +11,7 @@ export default function Header() {
     const navigate = useNavigate();
     
      async function HandleLogout () {
-      const url = 'http://localhost:3000/api/auth/logout';
+      const url = `${API_URL}/api/auth/logout`;
 
       try {
         const response = await fetch(url, {

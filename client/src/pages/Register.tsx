@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router";
 import { Link } from "react-router";
 import ThemeToggle from "../components/ThemeToggle";
+import { API_URL } from "../config/api";
 
 export default function RegisterForm() {
     const [email, setEmail] = useState('');
@@ -19,7 +20,7 @@ export default function RegisterForm() {
     return;
     }
 
-    const url = 'http://localhost:3000/api/users';
+    const url = `${API_URL}/api/users`;
 
     try {
       const response = await fetch(url, {

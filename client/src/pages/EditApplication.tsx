@@ -1,6 +1,7 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router";
+import { API_URL } from "../config/api";
 
 
 export default function EditApplication() {
@@ -17,7 +18,7 @@ export default function EditApplication() {
   useEffect(() => {
     async function fecthApplications() {
       try {
-        const response = await fetch(`http://localhost:3000/api/applications/${id}`, {credentials: 'include'});
+        const response = await fetch(`${API_URL}/api/applications/${id}`, {credentials: 'include'});
         if(response.ok){
         const data = await response.json()
         setCompany(data.company);
@@ -46,7 +47,7 @@ export default function EditApplication() {
       return;
     }
 
-    const url = `http://localhost:3000/api/applications/${id}`;
+    const url = `${API_URL}/api/applications/${id}`;
 
   try {
     const response = await fetch(url, {
