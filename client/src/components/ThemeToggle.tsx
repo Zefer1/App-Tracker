@@ -5,7 +5,7 @@ export default function ThemeToggle() {
 
   return (
     <button
-      className="btn btn-primary fixed top-4 right-4"
+      className="btn btn-primary"
       onClick={toggleTheme}
     >
       {theme === "dark" ? "Modo Claro" : "Modo Escuro"}

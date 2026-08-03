@@ -46,8 +46,10 @@ if(response.ok) {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-      <ThemeToggle />
+    <div className="relative flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
       <form className="card" onSubmit={HandleSubmit}>
        <h1 className="text-2xl font-bold text-center">Regista-te aqui</h1>
       <input placeholder="Email" className="input-field" value = {email} onChange={e => setEmail(e.target.value)}/>
