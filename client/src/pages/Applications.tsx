@@ -33,6 +33,8 @@ export default function Applications() {
   },[])
 
   async function HandleDeleteApplication (id: string) {
+    if (!window.confirm("Tens a certeza que queres apagar esta candidatura?")) return;
+
     const url = `http://localhost:3000/api/applications/${id}`
     try {
       const response = await fetch(url, {
