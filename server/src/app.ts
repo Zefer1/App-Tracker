@@ -10,6 +10,10 @@ const app: Express = express();
 
 const port = 3000;
 
+async function healthCheck(req: Request, res: Response) {
+  res.status(200).json({ status: 'ok' });
+}
+
 app.use(cors({
   origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   credentials: true
@@ -20,6 +24,8 @@ app.use(cookieParser())
 app.use('/api/users', UsersRouter);
 app.use('/api/applications', ApplicationsRouter);
 app.use('/api/auth', AuthRouter)
+
+app.get('/api/health', healthCheck);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
