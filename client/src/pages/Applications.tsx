@@ -58,9 +58,9 @@ export default function Applications() {
 
   const listApplications = applications.map(application =>
     <li className="card" key={application.id}>
-      <h2 className="text-lg font-bold">{application.company}</h2>
-      <p>{statusLabels[application.status]}</p>
-      <p>{application.position}</p>
+      <h2 className="text-lg font-bold">Empresa: {application.company}</h2>
+      <p>Estado: {statusLabels[application.status]}</p>
+      <p>Vaga: {application.position}</p>
       <div className="flex gap-2">
         <Link className="btn btn-primary" to={`/applications/${application.id}/edit`}>Editar</Link>
         <button className="btn btn-danger" onClick={() => {HandleDeleteApplication(application.id)}}>Apagar Candidatura</button>

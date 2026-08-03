@@ -51,10 +51,10 @@ export default function NewApplication() {
     <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
       <form className="card" onSubmit={HandleSubmit}>
         <h1 className="text-2xl font-bold text-center">Regista uma nova candidatura aqui.</h1>
-        <input  placeholder="Company" className="input-field" value = {company} onChange={e => setCompany(e.target.value)}/>
-        <input  placeholder="Position" className="input-field" value = {position} onChange={e => setPosition(e.target.value)}/>
+        <input  placeholder="Empresa" className="input-field" value = {company} onChange={e => setCompany(e.target.value)}/>
+        <input  placeholder="Vaga" className="input-field" value = {position} onChange={e => setPosition(e.target.value)}/>
         <input  placeholder="Link" className="input-field" value = {link} onChange={e => setLink(e.target.value)}/>
-        <input  placeholder="Notes" className="input-field" value = {notes} onChange={e => setNotes(e.target.value)}/>
+        <input  placeholder="Observações" className="input-field" value = {notes} onChange={e => setNotes(e.target.value)}/>
         <label>Escolhe o estado atual da candidatura.</label>
         <select value={status} onChange={e => setStatus(e.target.value)} className="input-field">
           <option value="SEM_RESPOSTA">Sem resposta</option>
