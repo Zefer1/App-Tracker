@@ -61,6 +61,8 @@ export default function Applications() {
       <h2 className="text-lg font-bold">Empresa: {application.company}</h2>
       <p>Estado: {statusLabels[application.status]}</p>
       <p>Vaga: {application.position}</p>
+      <p>Link: {application.link}</p>
+      <p>Observações: {application.notes}</p>
       <div className="flex gap-2">
         <Link className="btn btn-primary" to={`/applications/${application.id}/edit`}>Editar</Link>
         <button className="btn btn-danger" onClick={() => {HandleDeleteApplication(application.id)}}>Apagar Candidatura</button>
