@@ -41,3 +41,23 @@ CREATE TABLE IF NOT EXISTS public.applications
 TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public.applications
     OWNER to postgres;
+
+-- Table: public.application_status_history
+CREATE TABLE IF NOT EXISTS public.application_status_history
+(
+    id uuid NOT NULL DEFAULT gen_random_uuid(),
+    application_id uuid NOT NULL,
+    status application_status NOT NULL,
+    changed_at timestamp without time zone DEFAULT now(),
+    CONSTRAINT application_status_history_pkey PRIMARY KEY (id),
+    CONSTRAINT application_status_history_application_id_fkey FOREIGN KEY (application_id)
+        REFERENCES public.applications (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+TABLESPACE pg_default;
+ALTER TABLE IF EXISTS public.application_status_history
+    OWNER to postgres;
+
+CREATE INDEX IF NOT EXISTS idx_application_status_history_application_id
+    ON public.application_status_history (application_id);
