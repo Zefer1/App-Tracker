@@ -47,6 +47,7 @@ export default function Header() {
 
             <div className="hidden sm:flex gap-4">
               <Link className="btn btn-primary" to="/settings">Definições</Link>
+              <Link className="btn btn-primary" to="/dashboard">Dashboard</Link>
               <Link className="btn btn-primary" to="/applications">Candidaturas</Link>
               <Link className="btn btn-primary" to="/applications/new">Nova candidatura</Link>
             </div>
@@ -61,6 +62,7 @@ export default function Header() {
           {menuOpen && (
             <div className="flex flex-col gap-2 p-4 pt-0 sm:hidden">
               <Link className="btn btn-primary" to="/settings" onClick={() => setMenuOpen(false)}>Definições</Link>
+              <Link className="btn btn-primary" to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>
               <Link className="btn btn-primary" to="/applications" onClick={() => setMenuOpen(false)}>Candidaturas</Link>
               <Link className="btn btn-primary" to="/applications/new" onClick={() => setMenuOpen(false)}>Nova candidatura</Link>
               <ThemeToggle />

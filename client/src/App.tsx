@@ -4,6 +4,7 @@ import LoginForm from "./pages/Login"
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
 import Applications from "./pages/Applications";
+import Dashboard from "./pages/Dashboard";
 import EditApplication from "./pages/EditApplication";
 import NewApplication from "./pages/NewApplications";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -24,6 +25,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<Layout />}>
             <Route path="/settings" element={<Settings/>} />
+            <Route path="/dashboard" element={<Dashboard/>} />
             <Route path="/applications" element={<Applications/>} />
             <Route path="/applications/new" element={<NewApplication/>} />
             <Route path="/applications/:id/edit" element={<EditApplication/>} />
