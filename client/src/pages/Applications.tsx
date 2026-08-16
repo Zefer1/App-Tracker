@@ -14,6 +14,8 @@ export default function Applications() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [erro, setErro] = useState('');
   const [loading, setLoading] = useState(true);
+  const [statusFilter, setStatusFilter] = useState('TODOS');
+  const [sortBy, setSortBy] = useState('recentes');
 
   useEffect(() => {
     async function fecthApplications() {
@@ -56,7 +58,17 @@ export default function Applications() {
     }
   }
 
-  const listApplications = applications.map(application =>
+  const filteredApplications = statusFilter === 'TODOS'
+    ? applications
+    : applications.filter(app => app.status === statusFilter);
+
+  const visibleApplications = [...filteredApplications].sort((a, b) => {
+    if (sortBy === 'empresa') return a.company.localeCompare(b.company);
+    if (sortBy === 'antigas') return new Date(a.applied_at).getTime() - new Date(b.applied_at).getTime();
+    return new Date(b.applied_at).getTime() - new Date(a.applied_at).getTime();
+  });
+
+  const listApplications = visibleApplications.map(application =>
     <li className="card" key={application.id}>
       <h2 className="text-lg font-bold">Empresa: {application.company}</h2>
       <p>Estado: {statusLabels[application.status]}</p>
@@ -74,8 +86,24 @@ export default function Applications() {
 
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
       <p className="text-red-500 dark:text-red-400">{erro}</p>
+      <div className="flex flex-wrap gap-4 mb-4">
+        <select className="input-field" value={statusFilter} onChange={e => setStatusFilter(e.target.value)}>
+          <option value="TODOS">Todos os estados</option>
+          {Object.entries(statusLabels).map(([value, label]) => (
+            <option key={value} value={value}>{label}</option>
+          ))}
+        </select>
+
+        <select className="input-field" value={sortBy} onChange={e => setSortBy(e.target.value)}>
+          <option value="recentes">Mais recentes</option>
+          <option value="antigas">Mais antigas</option>
+          <option value="empresa">Empresa (A-Z)</option>
+        </select>
+      </div>
       {loading ? (
         <p>A carregar candidaturas...</p>
+      ) : visibleApplications.length === 0 ? (
+        <p>Nenhuma candidatura encontrada.</p>
       ) : (
         <ul className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">{listApplications}</ul>
       )}
