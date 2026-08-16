@@ -41,8 +41,16 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
-        <p>A carregar...</p>
+      <div className="min-h-screen bg-gray-100 dark:bg-gray-900 p-8">
+        <h1 className="text-2xl font-bold mb-4">Dashboard</h1>
+        <div className="grid gap-4 grid-cols-2 sm:grid-cols-4 mb-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="card animate-pulse">
+              <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-2/3"></div>
+              <div className="h-8 bg-gray-300 dark:bg-gray-700 rounded w-1/2"></div>
+            </div>
+          ))}
+        </div>
       </div>
     )
   }

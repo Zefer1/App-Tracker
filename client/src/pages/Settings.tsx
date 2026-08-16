@@ -106,8 +106,14 @@ if(response.ok) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
-        <p>A carregar...</p>
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 gap-4">
+        <div className="h-7 bg-gray-300 dark:bg-gray-700 rounded w-48 animate-pulse"></div>
+        <div className="h-4 bg-gray-300 dark:bg-gray-700 rounded w-32 animate-pulse"></div>
+        <div className="card w-full max-w-sm animate-pulse">
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+        </div>
       </div>
     )
   }

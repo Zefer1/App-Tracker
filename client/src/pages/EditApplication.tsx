@@ -75,8 +75,15 @@ export default function EditApplication() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900 dark:text-gray-100">
-        <p>A carregar...</p>
+      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+        <div className="card w-full max-w-sm animate-pulse">
+          <div className="h-6 bg-gray-300 dark:bg-gray-700 rounded w-2/3 mx-auto"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+          <div className="h-9 bg-gray-300 dark:bg-gray-700 rounded"></div>
+        </div>
       </div>
     )
   }
