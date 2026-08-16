@@ -77,6 +77,34 @@ export async function updateApplication(req: Request, res: Response) {
   }
 }
 
+export async function getApplicationStats(req: Request, res: Response) {
+  const { userId } = req.user as JwtPayload;
+
+  const countsText = 'SELECT status, COUNT(*) FROM applications WHERE user_id = $1 GROUP BY status';
+  const countsResult = await pool.query(countsText, [userId]);
+
+  const counts: Record<string, number> = {
+    SEM_RESPOSTA: 0,
+    ENTREVISTA: 0,
+    OFERTA: 0,
+    RECUSADO: 0,
+  };
+  countsResult.rows.forEach(row => {
+    counts[row.status] = Number(row.count);
+  });
+
+  const avgText = `
+    SELECT AVG(EXTRACT(EPOCH FROM (updated_at - applied_at))) AS avg_response_seconds
+    FROM applications
+    WHERE user_id = $1 AND status != 'SEM_RESPOSTA'
+  `;
+  const avgResult = await pool.query(avgText, [userId]);
+  const avgSeconds = avgResult.rows[0].avg_response_seconds;
+  const avgResponseDays = avgSeconds ? Math.round((avgSeconds / 86400) * 10) / 10 : null;
+
+  res.json({ counts, avgResponseDays });
+}
+
 export async function deleteApplication(req:Request, res:Response) {
   const { id } = req.params;
   const { userId } = req.user as JwtPayload;
